@@ -54,7 +54,15 @@ import Model.*;
 	        		} while (true);
 	        		CharacterSelect characters = new CharacterSelect();
 	        		JOptionPane.showMessageDialog(null, characters);
+	        		
+	        		// Get list of players back from pop-up
+	        		
+	        		
 	        		Game game = new Game();
+	        		
+	        		// set number of players in game
+	        		// Set listOfPlayers in game
+	        		
 	        		game.gameSetup();
 	        	}
 	        });
