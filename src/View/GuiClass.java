@@ -9,7 +9,7 @@ import Model.*;
 	public class GuiClass {
 	    public static void main(String[] args) {
     		Game game = new Game();
-    		game.gameSetup();
+    		Board board = game.gameSetup();
 	        JFrame jFrame = new JFrame("Hola amigos");
 	        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        jFrame.setSize(1920, 1080);
@@ -25,14 +25,13 @@ import Model.*;
 	        
 	        
 	        BoardPanel boardPanel = new BoardPanel();
-	        ButtonGrid buttonGrid = new ButtonGrid(game);
-	        boardPanel.add(buttonGrid);
 	        RightPanel rightPanel = new RightPanel();
 	        HandPanel handPanel = new HandPanel();
  
 
 	        jFrame.add(rightPanel, BorderLayout.EAST);
 	        jFrame.add(boardPanel, BorderLayout.CENTER);
+	        boardPanel.add(new ButtonGrid(game, board));
 	        jFrame.add(handPanel, BorderLayout.SOUTH);
 	        jFrame.add(leftMainPanel, BorderLayout.WEST);
 

@@ -15,44 +15,63 @@ import Model.Game;
 import Model.Room;
 
 public class ButtonGrid extends JPanel {
-
-    JFrame frame = new JFrame();
-    int t = 9;
     private Game game;
-
-    public ButtonGrid(Game game) { // constructor
-        frame.setContentPane(this);
-        Board board = new Board();
-        setLayout(new GridLayout(25, 24, 3, 3));
-//        addButtons(t);
+    private Board board;
+    
+    public ButtonGrid(Game game, Board board) { // constructor
         this.game = game;
-        setPreferredSize(new Dimension(800, 800));
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        this.board = board;
+		setPreferredSize(new Dimension(1000, 1000));
 
     }
 @Override
     protected void paintComponent(Graphics g) {
-    	Board board = new Board();
-    	board.populateBoard(game.getRooms());
-        super.paintComponent(g);
-        g.setColor(getBackground());
-        for(Room room : game.getRooms()) {
-    		if(room.getName().equals("Hallway")) {
-    			g.setColor(Color.CYAN);
-    		}
-    		else {
-    			g.setColor(Color.BLUE);
-    		}
-        	for(Cell cell : room.getCells()) {
-        		int coordx = getWidth() * cell.getXValue() / 24;
-        		int coordy = getHeight() * cell.getYValue()/ 25;
+    	super.paintComponent(g);
+    	for (int row = 0; row < 25; row++) {
+    		for (int col = 0; col < 24; col++) {
+    			int coordx = getWidth() * col / 24;
+    			int coordy = getHeight() * row / 25;
+                Cell currentCell = board.getBoard()[col][row];
 
-        			g.fillRect(coordx, coordy, 800, 800);
-        		}
-        	}
+                if(currentCell.getRoom().getName().equals("Hallway")) {
+        			g.setColor(Color.BLACK);
+                	g.fillRect(coordx, coordy, 800, 800);
+                }
+                if(currentCell.getRoom().getName().equals("Wall")) {
+                	g.setColor(Color.WHITE);
+                	g.fillRect(coordx, coordy, 800, 800);
+                }
+                else {
+                	g.setColor(Color.CYAN);
+                	g.fillRect(coordx, coordy, 800, 800);
+                }
+    		}
+  }
+//        for(Room room : game.getRooms()) {
+//    		if(!room.getName().equals("Hallway")) {
+//    			System.out.println(room.getCells().size());
+//	        	for(Cell cell : room.getCells()) {
+//	    			g.setColor(Color.black);
+//	        		int coordx = getWidth() * cell.getXValue() / 24;
+//	        		int coordy = getHeight() * cell.getYValue()/ 25;
+//	        		
+//	        		g.setColor(Color.cyan);
+//	        	}
+//	            System.out.println(g.getColor());
+//    		}
+//    		else {
+//        		
+//    			System.out.println(room.getCells().size());
+//	        	for(Cell cell : room.getCells()) {  			
+//	        		int coordx = getWidth() * cell.getXValue() / 24;
+//	        		int coordy = getHeight() * cell.getYValue()/ 25;
+//	        		g.fillRect(coordx, coordy, 800, 800);
+//	        	}
+//	            System.out.println(g.getColor());
+//    		}
         }
+
+
 //            	g.fillRect(coordx, coordy, 800, 800);
 //            	char currentChar = board.getBoardString().charAt((row * 24) + col);
 //                Cell currentCell = new Cell(col, row);
@@ -62,10 +81,12 @@ public class ButtonGrid extends JPanel {
 //                	 case 'O':
 //                		 g.setColor(Color.CYAN);
 //                		 g.fillRect(coordx, coordy, 800, 800);
-////                		 currentCell.setRoom(rooms.get(0));
-////                		 currentCell.addCellToRoom("Lounge", rooms);
-////                		 
-////  					break;
+                }
+                
+//                		 currentCell.setRoom(rooms.get(0));
+//                		 currentCell.addCellToRoom("Lounge", rooms);
+//                		 
+//  					break;
 //                   case 'D':
 //              		 g.setColor(Color.CYAN);
 //              		 g.fillRect(coordx, coordy, 800, 800);
@@ -143,20 +164,11 @@ public class ButtonGrid extends JPanel {
 //        }
 //            
 //        
-//    for (int row = 0; row < 25; row++) {
-//        for (int col = 0; col < 24; col++) {
-//        	g.setColor(Color.BLACK);
-//            	int coordx = getWidth() * row / 25;
-//            	int coordy = getHeight() * col / 24;
-//            	g.drawLine(coordx, 0, coordx, getHeight());
-//            	g.drawLine(0, coordy, getWidth(), coordy);
-//        }
-//    }
 //            	char currentChar = board.getBoardString().charAt((row * 24) + col);
 //                Cell currentCell = new Cell(col, row);
 //                board.getBoard()[col][row] = currentCell;
 //                switch (currentChar) {
 
-            }
+            
         
     

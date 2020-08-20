@@ -62,10 +62,12 @@ public class Game {
 	 * Then sets aside the murder deck
 	 * Creates the deck and all the players
 	 */
-	public void gameSetup() {
+	public Board gameSetup() {
 		listCreation();
 		murderDeck();
 		createDeck();
+		board.populateBoard(roomObjects);
+		return board;
 	}
 
 	/**
