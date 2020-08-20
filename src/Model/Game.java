@@ -63,60 +63,9 @@ public class Game {
 	 * Creates the deck and all the players
 	 */
 	public void gameSetup() {
-		// Sets the number of players
-		System.out.println(
-				"####################################################\n" +
-						"#                                                  #\n" +
-						"#      ####  #      #   #  #####  ####    ###      #\n" +
-						"#     #      #      #   #  #      #   #  #   #     #\n" +
-						"#     #      #      #   #  ###    #   #  #   #     #\n" +
-						"#     #      #      #   #  #      #   #  #   #     #\n" +
-						"#      ####  #####  #####  #####  ####    ###      #\n" +
-						"#                                                  #\n" +
-				"####################################################");
-
-		try {
-			Thread.sleep(1500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("How many players?");
-
-		do { // loop until we have correct input
-			System.out.println("Please enter a number between 3 and 6");
-			try {
-				numberOfPlayers = scanner.nextInt(); // Blocks for user input
-				if (numberOfPlayers > 2 && numberOfPlayers < 7) {
-					break; // Got valid input, stop looping
-				} else {
-					System.out.println("Please enter a number between 3 and 6");
-					scanner.next(); // discard non-integer input
-					continue; // restart loop, didn't get an integer input
-				}
-
-			} catch (final InputMismatchException e) {
-				System.out.println("You have entered an invalid input. Try again.");
-				scanner.next(); // discard non-integer input
-				continue; // restart loop, didn't get an integer input
-			}
-		} while (true);
-
-		System.out.println("\n------------------   GENERATING GAME   ------------------");
-		try {
-			Thread.sleep(1500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
 		listCreation();
 		murderDeck();
 		createDeck();
-		generatePlayers();
-		//This prints out where the weapons are
-		for(int i = 0; i < weapons.size(); i++) {
-			WeaponCard weapon = (WeaponCard) weapons.get(i);
-			System.out.println("The " + weapon.getName() +" is in the : " + (weapon.getRoom()));
-		}
 	}
 
 	/**
@@ -136,7 +85,7 @@ public class Game {
 					break;
 				}
 			}
-			Player player = new Player(character);
+			Player player = new Player();
 			//sets a player to the character's starting position
 			int x = player.getCharacterCard().getStartLocation().getXValue();
 			int y = player.getCharacterCard().getStartLocation().getYValue();
@@ -544,7 +493,7 @@ public class Game {
 	}
 
 
-	public boolean setNumberOPlayers(int aNumberOPlayers) {
+	public boolean setNumberOfPlayers(int aNumberOPlayers) {
 		boolean wasSet = false;
 		numberOfPlayers = aNumberOPlayers;
 		wasSet = true;
@@ -581,8 +530,8 @@ public class Game {
 		return characters;
 	}
 
-	public ArrayList<Card> getRooms() {
-		return rooms;
+	public ArrayList<Room> getRooms() {
+		return roomObjects;
 	}
 
 	public Scanner getScanner() {

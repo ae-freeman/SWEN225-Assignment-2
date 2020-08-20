@@ -25,9 +25,7 @@ public class Player {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Player(CharacterCard aAssignedCharacter) {
-		assignedCharacter = aAssignedCharacter;
-		location = assignedCharacter.getStartLocation();
+	public Player() {
 		playerStatus = false;
 		playerHand = new ArrayList<Card>();
 	}

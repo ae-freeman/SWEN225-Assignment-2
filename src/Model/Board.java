@@ -46,6 +46,10 @@ public class Board
   {
 	  board = new Cell[WIDTH][LENGTH];
   }
+  
+  public String getBoardString() {
+	  return boardString;
+  }
 
   //------------------------
   // INTERFACE
